@@ -9,6 +9,7 @@ export const PriceList: React.FC = () => {
   if (isError) return <div className="p-8 text-red-500 text-center">Connection Error</div>;
 
   let prices = data?.data || [];
+  let sortedPrices = [...prices].sort((a, b) => a.symbol.localeCompare(b.unit));
 
   // Logic for health goals: Focusing on specific assets or future food data
   // For now, let's assume assets like 'XAU' might relate to your long-term 'Wealth & Health'
@@ -37,7 +38,7 @@ export const PriceList: React.FC = () => {
       </header>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto">
-        {prices.map((price) => {
+        {sortedPrices.map((price) => {
           const isPositive = price.change_percent >= 0;
 
           return (
